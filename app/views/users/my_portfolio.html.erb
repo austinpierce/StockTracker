@@ -1,7 +1,9 @@
 <h1>
   My Portfolio
 </h1>
-
+<%= @user.email %>
+<%= @user_stocks.first.quantity %>
+<%#= @user_stocks.first.to_json %>
 <h3>Search for Stocks</h3>
 <div id ="stock-lookup">
   <%= form_tag search_stocks_path, remote: true, method: :get, id: "stock-lookup-form" do %>
