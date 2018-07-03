@@ -2,9 +2,9 @@ class Stock < ApplicationRecord
   has_many :user_stocks
   has_many :users, through: :user_stocks
   
-#  def current_price(ticker_symbol)
- #   @currentPrice = StockQuote:Stock.quote(ticker_symbol).latest_price  
-#  end
+  def current_price(ticker_symbol)
+    @currentPrice = StockQuote:Stock.quote(ticker_symbol).latest_price  
+  end
   
   def self.new_from_lookup(ticker_symbol)
     begin
