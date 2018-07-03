@@ -1,4 +1,5 @@
 class UserStocksController < ApplicationController
+  before_action :find_userStock, only: [:edit, :update]
   
   def create
     stock = Stock.find_by_ticker(params[:stock_ticker])
@@ -11,6 +12,20 @@ class UserStocksController < ApplicationController
     redirect_to my_portfolio_path
   end
   
+  def edit
+    # set in before_action
+  end
+  
+  def update
+     # set in before_action
+    if @user_stocks.update(userstocks_params)
+      flash[:notice] = "Successfully updated"
+      redirect_to my_portfolio_path
+     else
+      render 'edit'
+    end
+  end
+  
   def destroy
     stock = Stock.find(params[:id])
     @user_stock = UserStock.where(user_id: current_user.id, stock_id: stock.id).first
@@ -18,5 +33,18 @@ class UserStocksController < ApplicationController
     flash[:notice] = "Stock was successfully removed from portfolio"
     redirect_to my_portfolio_path
   end
+  
+  private
+    
+  def userstocks_params
+    params.require(:user_stock).permit(:quantity, :purchase_price) #white listing
+  end
+  
+  def find_userStock
+    @user_stocks = UserStock.find(params[:id])
+  end
+  
+
+  
   
 end

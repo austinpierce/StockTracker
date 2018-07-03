@@ -4,6 +4,8 @@
       <th>Name</th>
       <th>Symbol</th>
       <th>Current Price</th>
+      <th>Quantity</th>
+      <th>Purchase Price</th>
       <% if @user.id == current_user.id %>
         <th>Actions</th>
       <% end %>
@@ -16,13 +18,14 @@
         <td><%= user_stock.stock.ticker %></td>
         <td><%= user_stock.stock.last_price %></td>
         <td><%= user_stock.quantity %></td>
-        <td><%= user_stock.purchase_price %></td>
+        <td>$<%= user_stock.purchase_price %></td>
         <% if @user.id == current_user.id %>
-          <td><%= link_to "Delete this stock", user_stock_path(user_stock), 
+          <td><%= link_to "Delete", user_stock_path(user_stock.stock), 
                       method: :delete,
                       data: {confirm: "Are you sure?"}, 
                       class: "btn btn-xs btn-danger" %>
           </td>
+        <td><%= link_to "Edit", edit_user_stock_path(user_stock), class: "btn btn-xs btn-warning"%></td>
         <% end %>
       </tr>
     <% end %>

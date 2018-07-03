@@ -1,0 +1,13 @@
+<%= form_for @user_stocks  do |f| %>
+  <p>
+    <%= f.label :quantity %>  <br>
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :purchase_price %> <br>
+    <%= f.text_area :purchase_price %>
+  </p>
+  <p>
+  <%= f.submit %>  
+  </p>
+<% end %>
