@@ -12,6 +12,10 @@ class UserStocksController < ApplicationController
     redirect_to my_portfolio_path
   end
   
+  def realPrice
+    @realPrice = Stock.current_price(params[:stock_ticker])
+  end
+  
   def edit
     # set in before_action
   end

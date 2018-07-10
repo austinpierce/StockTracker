@@ -12,4 +12,8 @@ class StocksController < ApplicationController
     end
   end
   
+  def realPrice
+    @realPrice = Stock.current_price("IJH")
+  end
+   
 end
