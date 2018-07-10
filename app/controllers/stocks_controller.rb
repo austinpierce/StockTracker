@@ -11,9 +11,5 @@ class StocksController < ApplicationController
       format.js { render partial: 'users/result' }
     end
   end
-  
-  def realPrice
-    @realPrice = Stock.current_price("IJH")
-  end
-   
+    
 end

@@ -3,10 +3,10 @@
     <tr>
       <th>Name</th>
       <th>Symbol</th>
-      <th>Current Price</th>
       <th>Quantity</th>
       <th>Purchase Price</th>
-      <th>Cost</th>
+      <th>Current Price</th>
+      <th>Profit</th>
     </tr>
   </thead>
   <tbody>
@@ -14,11 +14,13 @@
       <tr> 
         <td><%= user_stock.stock.name %></td>
         <td><%= user_stock.stock.ticker %></td>
-        <td>$<%= user_stock.stock.last_price %></td>
         <td><%= user_stock.quantity %></td>
-        <td>$<%= user_stock.purchase_price %></td>
-        <td>$<%= user_stock.purchase_price * user_stock.quantity %></td>
+        <td>$<%= user_stock.purchase_price %></td>        
+        <% currentPrice = Stock.current_price(user_stock.stock.ticker) %>
         <td>$<%= Stock.current_price(user_stock.stock.ticker) %></td>
+        <% cost = user_stock.purchase_price * user_stock.quantity %>
+        <% profit = (currentPrice * user_stock.quantity) - cost %>
+        <td><strong><%= number_to_currency(profit) %></strong></td>
         <% if @user.id == current_user.id %>
         <td><%= link_to "Edit", edit_user_stock_path(user_stock), class: "btn btn-xs btn-warning"%></td>
         <td><%= link_to "Delete", user_stock_path(user_stock.stock), 
