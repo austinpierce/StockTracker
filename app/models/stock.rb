@@ -17,8 +17,11 @@ class Stock < ApplicationRecord
   
     
   def self.current_price(ticker_symbol)
-    StockQuote::Stock.quote(ticker_symbol).latest_price
+    stockQuote = StockQuote::Stock.quote(ticker_symbol).latest_price
   end
-  
+ 
+  def self.open_price(ticker_symbol)
+    stockQuote = StockQuote::Stock.quote(ticker_symbol).open
+  end
   
 end
