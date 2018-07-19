@@ -24,4 +24,11 @@ class Stock < ApplicationRecord
     stockQuote = StockQuote::Stock.quote(ticker_symbol).open
   end
   
+  def self.investment_value(user)
+    quantity = UserStock.where(user_id: user).sum(:quantity)
+    price = UserStock.where(user_id: user).sum(:purchase_price)
+    total = quantity * price
+    total.to_f
+  end
+  
 end
