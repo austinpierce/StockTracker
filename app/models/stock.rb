@@ -25,7 +25,7 @@ class Stock < ApplicationRecord
   end
   
   def self.investment_value(user)
-    total = UserStock.select("quantity * purchase_price as total1").map(&:total1)
+    total = UserStock.select("quantity * purchase_price as total1").where("user_id = #{user}").map(&:total1)
     totalInvest = total.sum
   end
   
