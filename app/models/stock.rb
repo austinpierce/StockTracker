@@ -29,4 +29,9 @@ class Stock < ApplicationRecord
     totalInvest = total.sum
   end
   
+  def self.return_all_stocks
+    x = Stock.joins(:user_stocks).select("stocks.id, Name, Ticker, user_stocks.Quantity as   quan, user_stocks.purchase_price as pp4, user_stocks.id as usid")
+    x.to_a
+  end
+  
 end
