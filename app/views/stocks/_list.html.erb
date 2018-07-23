@@ -13,40 +13,40 @@
     </tr>
   </thead>
   <tbody>
-    <% Stock.return_all_stocks.each do |user_stock| %>
+    <% @user_stocks.each do |user_stock| %>
       <tr> 
-        <td><%= user_stock.name %></td>
-        <td><%= user_stock.ticker %></td>
-        <td><%= user_stock.quan %></td>
-        <td><%= number_to_currency(user_stock.pp4) %></td>
-        <% openPrice = Stock.open_price(user_stock.ticker) %>
-        <td><%= number_to_currency(Stock.open_price(user_stock.ticker)) %></td>
-        <% currentPrice = Stock.current_price(user_stock.ticker) %>
-        <td><%= number_to_currency(Stock.current_price(user_stock.ticker)) %></td>
+        <td><%= user_stock.stock.name %></td>
+        <td><%= user_stock.stock.ticker %></td>
+        <td><%= user_stock.quantity %></td>
+        <td><%= number_to_currency(user_stock.purchase_price) %></td>
+        <% openPrice = Stock.open_price(user_stock.stock.ticker) %>
+        <td><%= number_to_currency(Stock.open_price(user_stock.stock.ticker)) %></td>
+        <% currentPrice = Stock.current_price(user_stock.stock.ticker) %>
+        <td><%= number_to_currency(Stock.current_price(user_stock.stock.ticker)) %></td>
         <% dayChange = (currentPrice - openPrice) %>
         <% if dayChange > 0 %>
           <td class = "green"><%= number_to_currency(dayChange) %></td>
         <% else %>
           <td class = "red"><%= number_to_currency(dayChange) %></td>
         <% end %>
-        <% dayGain = dayChange * user_stock.quan %>
+        <% dayGain = dayChange * user_stock.quantity %>
         <% if dayGain > 0 %>
           <td class = "green"><%= number_to_currency(dayGain) %></td>
         <% else %>
           <td class = "red"><%= number_to_currency(dayGain) %></td>
         <% end %>        
-        <% cost = user_stock.pp4 * user_stock.quan %>
-        <% profit = (currentPrice * user_stock.quan) - cost %>
+        <% cost = user_stock.purchase_price * user_stock.quantity %>
+        <% profit = (currentPrice * user_stock.quantity) - cost %>
         <td><strong><%= number_to_currency(profit) %></strong></td>
         <% if @user.id == current_user.id %>
-        <td><%= link_to "Edit", edit_user_stock_path(user_stock.usid), class: "btn btn-xs btn-warning"%></td>
-        <td><%= link_to "Delete", user_stock_path(user_stock.id), 
+        <td><%= link_to "Edit", edit_user_stock_path(user_stock), class: "btn btn-xs btn-warning"%></td>
+        <td><%= link_to "Delete", user_stock_path(user_stock.stock), 
                       method: :delete,
                       data: {confirm: "Are you sure?"}, 
                       class: "btn btn-xs btn-danger" %>
           </td>
         <% end %>
-    </tr>
+      </tr>
     <% end %>
   </tbody>
 </table>

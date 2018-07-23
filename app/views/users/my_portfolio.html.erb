@@ -3,7 +3,8 @@
 </h1>
 <%= @user.email %><br>
 <h4>
-  Investment Value: <%= number_to_currency(Stock.investment_value(@user.id)) %>
+  Investment Value: <%= number_to_currency(Stock.investment_value(@user.id)) %><br>
+  Day Gain: <%= number_to_currency(Stock.day_change_total(@user.id)) %>
 </h4>
 <h3>Search for Stocks</h3>
 <div id ="stock-lookup">

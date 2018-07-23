@@ -28,26 +28,25 @@ class Stock < ApplicationRecord
     total = UserStock.select("quantity * purchase_price as total1").where("user_id = #{user}").map(&:total1)
     totalInvest = total.sum
   end
-  
-  def self.return_all_stocks
-    x = Stock.joins(:user_stocks).select("stocks.id, Name, Ticker, user_stocks.Quantity as   quan, user_stocks.purchase_price as pp4, user_stocks.id as usid")
-    x.to_a
-  end
-  
-  def self.day_change_total#(user)
-    stocks = Stock.joins(:user_stocks).select("Ticker as ticker").where("user_id = 1").map(&:ticker)
+   
+  def self.day_change_total(user)
+    stocks = Stock.joins(:user_stocks).select("Ticker as ticker, user_stocks.Quantity as quan").where("user_id = #{user}")
+    stocks.to_a
     latestPriceTotal = 0
+    quanCurrent = 0
+    quanOpen = 0
     openPriceTotal = 0
     
     stocks.each do |stock|
-      latest_price = StockQuote::Stock.quote(stock).latest_price
-      open_price = StockQuote::Stock.quote(stock).open
-      latestPriceTotal += latest_price     
-      openPriceTotal += open_price
+      latest_price = StockQuote::Stock.quote(stock.ticker).latest_price
+      open_price = StockQuote::Stock.quote(stock.ticker).open
+      quanCurrent = latest_price * stock.quan
+      quanOpen = open_price * stock.quan
+      latestPriceTotal += quanCurrent     
+      openPriceTotal += quanOpen
     end
-    
     grandtotal = latestPriceTotal - openPriceTotal
-    puts grandtotal
+
   end
   
 end
