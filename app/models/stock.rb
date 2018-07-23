@@ -34,4 +34,20 @@ class Stock < ApplicationRecord
     x.to_a
   end
   
+  def self.day_change_total#(user)
+    stocks = Stock.joins(:user_stocks).select("Ticker as ticker").where("user_id = 1").map(&:ticker)
+    latestPriceTotal = 0
+    openPriceTotal = 0
+    
+    stocks.each do |stock|
+      latest_price = StockQuote::Stock.quote(stock).latest_price
+      open_price = StockQuote::Stock.quote(stock).open
+      latestPriceTotal += latest_price     
+      openPriceTotal += open_price
+    end
+    
+    grandtotal = latestPriceTotal - openPriceTotal
+    puts grandtotal
+  end
+  
 end
