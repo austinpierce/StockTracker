@@ -52,15 +52,15 @@ class Stock < ApplicationRecord
   def self.portfolio_value(user)
     stocks = Stock.joins(:user_stocks).select("Ticker as ticker, user_stocks.Quantity as quan").where("user_id = #{user}")
     stocks.to_a
-    latestPriceTotal = 0
-    quanCurrent = 0
+    currentPriceTotal = 0
+    quanCurrentPrice = 0
     
     stocks.each do |stock|
-      latest_price = StockQuote::Stock.quote(stock.ticker).latest_price
-      quanCurrent = latest_price * stock.quan
-      latestPriceTotal += quanCurrent     
+      currentPrice = StockQuote::Stock.quote(stock.ticker).latest_price
+      quanCurrentPrice = currentPrice * stock.quan
+      currentPriceTotal += quanCurrentPrice     
     end
-    grandtotal = latestPriceTotal
+    currentPriceTotal
 
   end
  
