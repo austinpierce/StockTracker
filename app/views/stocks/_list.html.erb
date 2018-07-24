@@ -20,17 +20,17 @@
         <td><%= user_stock.quantity %></td>
         <td><%= number_to_currency(user_stock.purchase_price) %></td>
         <% openPrice = Stock.open_price(user_stock.stock.ticker) %>
-        <td><%= number_to_currency(Stock.open_price(user_stock.stock.ticker)) %></td>
+        <td><%= number_to_currency(openPrice) %></td>
         <% currentPrice = Stock.current_price(user_stock.stock.ticker) %>
-        <td><%= number_to_currency(Stock.current_price(user_stock.stock.ticker)) %></td>
+        <td><strong><%= number_to_currency(currentPrice) %></strong></td>
         <% dayChange = (currentPrice - openPrice) %>
-        <% if dayChange > 0 %>
+        <% if dayChange >= 0 %>
           <td class = "green"><%= number_to_currency(dayChange) %></td>
         <% else %>
           <td class = "red"><%= number_to_currency(dayChange) %></td>
         <% end %>
         <% dayGain = dayChange * user_stock.quantity %>
-        <% if dayGain > 0 %>
+        <% if dayGain >= 0 %>
           <td class = "green"><%= number_to_currency(dayGain) %></td>
         <% else %>
           <td class = "red"><%= number_to_currency(dayGain) %></td>
