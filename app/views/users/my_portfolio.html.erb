@@ -3,15 +3,18 @@
 </h1>
 <%= @user.email %><br>
 <% dayGain = Stock.day_change_total(@user.id) %>
+<% investValue = Stock.investment_value(@user.id) %>
 <% portValue = Stock.portfolio_value(@user.id) %>
-<% roi = portValue - dayGain %>
+<% roi = portValue - investValue %>
 <h4>
-  Investment Value: <%= number_to_currency(Stock.investment_value(@user.id)) %><br>
-  Day Gain: <%= number_to_currency(dayGain) %>
+  Invested: <%= number_to_currency(investValue) %>
 <br>
   Portfolio Value: <%= number_to_currency(portValue) %>
 <br>
   Return On Investment: <%= number_to_currency(roi) %>
+<br>
+  Day Gain: <%= number_to_currency(dayGain) %>
+<br>
 </h4>
 <h3>Search for Stocks</h3>
 <div id ="stock-lookup">
