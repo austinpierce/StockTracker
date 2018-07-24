@@ -1,42 +1,56 @@
 <h1>
   My Portfolio
 </h1>
-<%= @user.email %><br>
+<%#= @user.email %><br>
 <% dayGain = Stock.day_change_total(@user.id) %>
 <% investValue = Stock.investment_value(@user.id) %>
 <% portValue = Stock.portfolio_value(@user.id) %>
 <% roi = portValue - investValue %>
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Metrics
+    Summary
   </a>
 </p>
 <div class="collapse" id="collapseExample">
     <div class="card card-body">
+        <div class="row">
+      <div class="col-6 col-sm-3">
         <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title">Invested</h4>
-            <p class="card-text"><%= number_to_currency(investValue) %></p>
-          </div>
+              <div class="card-body card-outline">
+                <h4 class="card-title">Invested</h4>
+                <p class="card-text"><%= number_to_currency(investValue) %></p>
+              </div>
         </div>
+      </div>
+      <div class="col-6 col-sm-3">
         <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title">Portfolio Value</h4>
-            <p class="card-text"><%= number_to_currency(portValue) %></p>
-          </div>
+              <div class="card-body card-outline">
+                <h4 class="card-title">Portfolio Value</h4>
+                <p class="card-text"><%= number_to_currency(portValue) %></p>
+              </div>
         </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title">Return On Investment</h4>
-            <p class="card-text"><%= number_to_currency(roi) %></p>
+       </div>
+       <div class="col-6 col-sm-3">
+         <div class="card" style="width: 18rem;">
+            <div class="card-body card-outline">
+              <h4 class="card-title">Return On Investment</h4>
+              <p class="card-text"><%= number_to_currency(roi) %></p>
+            </div>
           </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title">Day Gain</h4>
-            <p class="card-text"><%= number_to_currency(dayGain) %></p>
+       </div>
+    <div class="col-6 col-sm-3">
+      <div class="card" style="width: 18rem;">
+            <div class="card-body card-outline">
+              <h4 class="card-title">Day Gain</h4>
+                <% if dayGain >= 0 %>
+                  <p class = "green"><%= number_to_currency(dayGain) %></p>
+                <% else %>
+                  <p class = "red"><%= number_to_currency(dayGain) %></p>
+                <% end %>
+            </div>
           </div>
-        </div>
+       </div>
+    </div>
   </div>
 </div>
 <h3>Search for Stocks</h3>
