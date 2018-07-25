@@ -21,7 +21,7 @@ class Stock < ApplicationRecord
   end
  
   def self.close_price(ticker_symbol)
-    stockQuote = StockQuote::Stock.quote(ticker_symbol).close
+    stockQuote = StockQuote::Stock.previous(ticker_symbol).close
   end
   
   def self.investment_value(user)
@@ -39,7 +39,7 @@ class Stock < ApplicationRecord
     
     stocks.each do |stock|
       latest_price = StockQuote::Stock.quote(stock.ticker).latest_price
-      close_price = StockQuote::Stock.quote(stock.ticker).close
+      close_price = StockQuote::Stock.previous(stock.ticker).close
       quanCurrent = latest_price * stock.quan
       quanClose = close_price * stock.quan
       latestPriceTotal += quanCurrent     
