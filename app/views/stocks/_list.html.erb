@@ -5,7 +5,7 @@
       <th>Symbol</th>
       <th>Quantity</th>
       <th>Purchase Price</th>
-      <th>Open Price</th>
+      <th>Close Price</th>
       <th>Current Price</th>
       <th>Price Change</th>
       <th>Day Gain</th>
@@ -19,11 +19,11 @@
         <td><%= user_stock.stock.ticker %></td>
         <td><%= user_stock.quantity %></td>
         <td><%= number_to_currency(user_stock.purchase_price) %></td>
-        <% openPrice = Stock.open_price(user_stock.stock.ticker) %>
-        <td><%= number_to_currency(openPrice) %></td>
+        <% closePrice = Stock.close_price(user_stock.stock.ticker) %>
+        <td><%= number_to_currency(closePrice) %></td>
         <% currentPrice = Stock.current_price(user_stock.stock.ticker) %>
         <td><strong><%= number_to_currency(currentPrice) %></strong></td>
-        <% dayChange = (currentPrice - openPrice) %>
+        <% dayChange = (currentPrice - closePrice) %>
         <% if dayChange >= 0 %>
           <td class = "green"><%= number_to_currency(dayChange) %></td>
         <% else %>

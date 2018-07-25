@@ -1,7 +1,7 @@
 <h1>
   My Portfolio
 </h1>
-<%#= @user.email %><br>
+<%= @user.email %><br>
 <% dayGain = Stock.day_change_total(@user.id) %>
 <% investValue = Stock.investment_value(@user.id) %>
 <% portValue = Stock.portfolio_value(@user.id) %>

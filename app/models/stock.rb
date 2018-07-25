@@ -20,8 +20,8 @@ class Stock < ApplicationRecord
     stockQuote = StockQuote::Stock.quote(ticker_symbol).latest_price
   end
  
-  def self.open_price(ticker_symbol)
-    stockQuote = StockQuote::Stock.quote(ticker_symbol).open
+  def self.close_price(ticker_symbol)
+    stockQuote = StockQuote::Stock.quote(ticker_symbol).close
   end
   
   def self.investment_value(user)
@@ -34,18 +34,18 @@ class Stock < ApplicationRecord
     stocks.to_a
     latestPriceTotal = 0
     quanCurrent = 0
-    quanOpen = 0
-    openPriceTotal = 0
+    quanClose = 0
+    closePriceTotal = 0
     
     stocks.each do |stock|
       latest_price = StockQuote::Stock.quote(stock.ticker).latest_price
-      open_price = StockQuote::Stock.quote(stock.ticker).open
+      close_price = StockQuote::Stock.quote(stock.ticker).close
       quanCurrent = latest_price * stock.quan
-      quanOpen = open_price * stock.quan
+      quanClose = close_price * stock.quan
       latestPriceTotal += quanCurrent     
-      openPriceTotal += quanOpen
+      closePriceTotal += quanClose
     end
-    dayGain = latestPriceTotal - openPriceTotal
+    dayGain = latestPriceTotal - closePriceTotal
 
   end
   
