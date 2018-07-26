@@ -54,9 +54,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
-                          <span>Dashboard</span>
-                      </a>
+            <%= link_to "Dashboard", my_portfolio_path %>
           </li>
           
 
@@ -66,133 +64,7 @@
     </aside>
     <!--sidebar end-->
 
-    <!--main content start-->
-    <section id="main-content">
-      <section class="wrapper">
-        <!--overview start-->
-        <div class="row">
-          <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
-            <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
-            </ol>
-          </div>
-        </div>
-<% dayGain = Stock.day_change_total(@user.id) %>
-<% investValue = Stock.investment_value(@user.id) %>
-<% portValue = Stock.portfolio_value(@user.id) %>
-<% roi = portValue - investValue %>
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <div class="count"><%= number_to_currency(investValue) %></div>
-              <div class="title">Invested</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <div class="count"><%= number_to_currency(portValue) %></div>
-              <div class="title">Portfolio Value</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <div class="count"><%= number_to_currency(roi) %></div>
-              <div class="title">Return On Investment</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <div class="count"><%= number_to_currency(dayGain) %></div>
-              <div class="title">Day Gain</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-        </div>
-        <!--/.row-->
-        
-                    <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Symbol</th>
-                    <th>Quantity</th>
-                    <th>Purchase Price</th>
-                    <th>Previous Close Price</th>
-                    <th>Current Price</th>
-                    <th>Price Change</th>
-                    <th>Day Gain</th>
-                    <th>Profit</th>
-                  </tr>
-                </thead>
-                <tbody>
-            <% @user_stocks.each do |user_stock| %>
-                  <tr> 
-                    <td><%= user_stock.stock.name %></td>
-                    <td><%= user_stock.stock.ticker %></td>
-                    <td><%= user_stock.quantity %></td>
-                    <td><%= number_to_currency(user_stock.purchase_price) %></td>
-                    <% closePrice = Stock.close_price(user_stock.stock.ticker) %>
-                    <td><%= number_to_currency(closePrice) %></td>
-                    <% currentPrice = Stock.current_price(user_stock.stock.ticker) %>
-                    <td><strong><%= number_to_currency(currentPrice) %></strong></td>
-                    <% dayChange = (currentPrice - closePrice) %>
-                    <% if dayChange >= 0 %>
-                      <td class = "green"><%= number_to_currency(dayChange) %></td>
-                    <% else %>
-                      <td class = "red"><%= number_to_currency(dayChange) %></td>
-                    <% end %>
-                    <% dayGain = dayChange * user_stock.quantity %>
-                    <% if dayGain >= 0 %>
-                      <td class = "green"><%= number_to_currency(dayGain) %></td>
-                    <% else %>
-                      <td class = "red"><%= number_to_currency(dayGain) %></td>
-                    <% end %>        
-                    <% cost = user_stock.purchase_price * user_stock.quantity %>
-                    <% profit = (currentPrice * user_stock.quantity) - cost %>
-                    <td><strong><%= number_to_currency(profit) %></strong></td>
-                    <% if @user.id == current_user.id %>
-                    <td><%= link_to "Edit", edit_user_stock_path(user_stock), class: "btn btn-xs btn-warning"%></td>
-                    <td><%= link_to "Delete", user_stock_path(user_stock.stock), 
-                                  method: :delete,
-                                  data: {confirm: "Are you sure?"}, 
-                                  class: "btn btn-xs btn-danger" %>
-                      </td>
-                    <% end %>
-                  </tr>
-                <% end %>
-                </tbody>
-              </table>
-
-
- 
-
-      </section>
-      <div class="text-right">
-        <div class="credits">
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-          -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-      </div>
-    </section>
-    <!--main content end-->
+    
   </section>
   <!-- container section start -->
 
@@ -212,7 +84,7 @@
   <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="js/fullcalendar.min.js"></script>
+  <script src="js/fullcalendar.min.js"></script>
     <!-- Full Google Calendar - Calendar -->
     <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
