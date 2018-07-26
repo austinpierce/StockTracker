@@ -36,9 +36,13 @@
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <div class="count"><%= number_to_currency(dayGain) %></div>
-              <div class="title">Day Gain</div>
+            <% if dayGain >= 0 %>
+              <div class="info-box green-bg">
+            <% else %>
+              <div class="info-box red-bg">
+            <% end %>
+                <div class="count"><%= number_to_currency(dayGain) %></div>
+                <div class="title">Day Gain</div>
             </div>
             <!--/.info-box-->
           </div>

@@ -14,6 +14,7 @@ class UserStocksController < ApplicationController
   
   def edit
     # set in before_action
+    @user = current_user
   end
   
   def update

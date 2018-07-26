@@ -1972,6 +1972,16 @@ div[data-role="editor-toolbar"] {
 
 }
 
+.red-bg {
+
+  color : #fff;
+
+  background : #e02c2f;
+
+  background-color : #e02c2f;
+
+}
+
 .greenLight-bg {
 
   color: #71843f;
