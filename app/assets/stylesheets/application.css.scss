@@ -12,29 +12,20 @@
  *
  *= require_tree .
  *= require_self
-*= require bootstrap.min
-  <!-- bootstrap theme -->
-*= require bootstrap-theme
-  <!--external css-->
-  <!-- font icon -->
-*= require elegant-icons-style
-*= require font-awesome.min
-  <!-- full calendar css-->
-
-*= require fullcalendar
-  <!-- easy pie chart-->
-
-  <!-- owl carousel -->
-*= require owl.carousel
-*= require jquery-jvectormap-1.2.2
-  <!-- Custom styles -->
-*= require fullcalendar
-*= require widgets
-*= require style
-*= require style-responsive
-*= require xcharts.min
-*= require jquery-ui-1.10.4.min
- */
+ *= require bootstrap.min
+ *= require bootstrap-theme
+ *= require elegant-icons-style
+ *= require font-awesome.min
+ *= require fullcalendar
+ *= require owl.carousel
+ *= require jquery-jvectormap-1.2.2
+ *= require fullcalendar
+ *= require widgets
+ *= require style
+ *= require style-responsive
+ *= require xcharts.min
+ *= require jquery-ui-1.10.4.min
+*/
 
 .results-block {
   display: inline-block;
