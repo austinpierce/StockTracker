@@ -7,7 +7,12 @@
 <% investValue = Stock.investment_value(@user.id) %>
 <% portValue = Stock.portfolio_value(@user.id) %>
 <% roi = portValue - investValue %>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Show Summary
+  </button>
         <div class="row">
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
               <div class="count"><%= number_to_currency(investValue) %></div>
@@ -49,7 +54,10 @@
           <!--/.col-->
 
         </div>
+      </div>
+    </div>
         <!--/.row-->
+        <h4>Refresh Time <%= Time.now.strftime("%I:%M:%S %z")  %></h4>
           <h3>Search for Stocks</h3>
   <div id ="stock-lookup">
     <%= form_tag search_stocks_path, remote: true, method: :get, id: "stock-lookup-form" do %>
