@@ -6,6 +6,7 @@
 <% investValue = Stock.investment_value(@user.id) %>
 <% portValue = Stock.portfolio_value(@user.id) %>
 <% roi = portValue - investValue %>
+<h2>Refresh Time <%= Time.now.strftime("%I:%M:%S %z")  %></h2>
 <h4>
   Invested: <%= number_to_currency(investValue) %>
 <br>
